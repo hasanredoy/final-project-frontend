@@ -1,25 +1,18 @@
-import {Link} from 'react-router-dom'
-
+import { NavLink } from "react-router-dom";
+import './navbar.css'
 const Navbar = () => {
   const navs = (
-    <>
-      <li>
-        <Link>Home</Link>
-      </li>
-      <li>
-        <Link>Contact Us</Link>
-      </li>
-      <li>
-        <Link>Dashboard</Link>
-      </li>
-      <li>
-        <Link>Our Menu</Link>
-      </li>
-      <li>
-        <Link>Our Shop</Link>
-      </li>
-    
-    </>
+    <div className=" flex  gap-5 font-bold text-lg">
+      <NavLink to={"/"}>Home</NavLink>
+
+      <NavLink to={"/contact"}>Contact Us</NavLink>
+
+      <NavLink to={"/dashboard"}>Dashboard</NavLink>
+
+      <NavLink to={"/ourMenu"}>Our Menu</NavLink>
+
+      <NavLink to={"/ourShop"}>Our Shop</NavLink>
+    </div>
   );
   return (
     <div className="navbar fixed z-50  bg-black bg-opacity-30 max-w-6xl text-white">
@@ -48,14 +41,17 @@ const Navbar = () => {
             {navs}
           </ul>
         </div>
-        <a className="btn btn-ghost text-2xl">Bistro Boss</a>
+        <div className="flex flex-col  gap-0">
+        <a className=" text-3xl font-bold ">Bistro Boss </a>
+        <span className=" text-lg uppercase ">
+          R e s t a u r a n t</span>
+        </div>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navs}</ul>
+        <a className="btn ml-2">Login</a>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
-      </div>
+     
     </div>
   );
 };

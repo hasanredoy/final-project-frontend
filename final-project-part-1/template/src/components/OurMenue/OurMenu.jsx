@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../sectionTitle/SectionTitle";
 import MenuCart from "../MenuCart/MenuCart";
+import AllMenu from "../../CustomCompo/AllMenu";
 
 const OurMenu = () => {
-  const [menu , setMenu]=useState([])
-  useEffect(()=>{
-    fetch('menu.json')
-    .then(res=>res.json())
-    .then(data => setMenu(data))
-  },[])
-  console.log(menu);
+  const filterMenu=AllMenu("popular")
+  // console.log(filterMenu);
   return (
     <div className=" my-16">
       <SectionTitle
@@ -17,7 +13,7 @@ const OurMenu = () => {
       heading={"FROM OUR MENU"}
       ></SectionTitle>
       <div className=" grid grid-cols-1 gap-10 lg:grid-cols-2 ">
-          {menu.slice(0,6).map(menu=><MenuCart
+          {filterMenu.map(menu=><MenuCart
           key={menu._id} 
           items={menu}
           ></MenuCart>)}

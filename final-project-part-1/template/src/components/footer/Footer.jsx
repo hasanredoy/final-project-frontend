@@ -1,6 +1,6 @@
 const Footer = () => {
   const date = new Date();
-  console.log(date);
+  // console.log(date);
   return (
     <footer>
       <div className="footer    bg-neutral text-neutral-content">
