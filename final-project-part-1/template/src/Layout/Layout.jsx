@@ -1,7 +1,8 @@
-import {Outlet} from 'react-router-dom'
+import {Outlet, useLocation} from 'react-router-dom'
 import Navbar from '../components/navbar/Navbar';
 import Footer from '../components/footer/Footer';
 const Layout = () => {
+  const location = useLocation()
   return (
     <div>
       <div>
@@ -10,9 +11,11 @@ const Layout = () => {
       <div>
       <Outlet></Outlet>
       </div>
-      <div>
+      {
+        location?.pathname==='/contactUs'||<div>
         <Footer></Footer>
       </div>
+      }
     </div>
   );
 };

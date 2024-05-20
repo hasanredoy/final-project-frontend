@@ -1,17 +1,39 @@
-import { NavLink } from "react-router-dom";
-import './navbar.css'
+import { Link, NavLink } from "react-router-dom";
+import "./navbar.css";
+import { useContext } from "react";
+import { AuthContext } from "../../authProvider/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BsCartCheckFill } from "react-icons/bs";
+import useCart from "../../hooks/useCart";
+
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const [cart]= useCart()
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("logged out successfully");
+      })
+      .catch();
+  };
   const navs = (
-    <div className=" flex  gap-5 font-bold text-lg">
+    <div className=" flex  gap-4 font-bold text-lg">
       <NavLink to={"/"}>Home</NavLink>
 
-      <NavLink to={"/contact"}>Contact Us</NavLink>
+      <NavLink to={"/contactUs"}>Contact Us</NavLink>
 
-      <NavLink to={"/dashboard"}>Dashboard</NavLink>
+      <NavLink to={"/dashboard/cart"}>Dashboard</NavLink>
 
       <NavLink to={"/ourMenu"}>Our Menu</NavLink>
 
       <NavLink to={"/ourShop"}>Our Shop</NavLink>
+     <NavLink to={'/dashboard/cart'}>
+     <button className=" flex p-2 rounded-full bg-orange-900">
+        <BsCartCheckFill className=" text-2xl"></BsCartCheckFill>
+        <div className="badge badge-secondary">+{cart.length}</div>
+      </button>
+     </NavLink>
     </div>
   );
   return (
@@ -42,16 +64,28 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex flex-col  gap-0">
-        <a className=" text-3xl font-bold ">Bistro Boss </a>
-        <span className=" text-lg uppercase ">
-          R e s t a u r a n t</span>
+          <a className=" text-3xl font-bold ">Bistro Boss </a>
+          <span className=" text-lg uppercase ">R e s t a u r a n t</span>
         </div>
       </div>
-      <div className="navbar-end hidden lg:flex">
+      <div className="navbar-end w-[80%] hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navs}</ul>
-        <a className="btn ml-2">Login</a>
+        {user ? (
+          <button
+            onClick={handleLogOut}
+            className="btn text-white font-bold btn-error ml-2"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link to={"/login"}>
+            <button className="btn btn-accent text-white font-bold ml-2">
+              Login
+            </button>
+          </Link>
+        )}
       </div>
-     
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

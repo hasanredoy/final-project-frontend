@@ -4,8 +4,15 @@ import MenuCart from "../MenuCart/MenuCart";
 import AllMenu from "../../CustomCompo/AllMenu";
 
 const OurMenu = () => {
-  const filterMenu=AllMenu("popular")
-  // console.log(filterMenu);
+
+  const [filterMenu , setMenu]=useState([])
+  useEffect(()=>{
+    fetch(`http://localhost:5000/menu?category=popular`)
+    .then(res=>res.json())
+    .then(data => {
+      setMenu(data)
+    })
+  },[])
   return (
     <div className=" my-16">
       <SectionTitle
@@ -13,7 +20,7 @@ const OurMenu = () => {
       heading={"FROM OUR MENU"}
       ></SectionTitle>
       <div className=" grid grid-cols-1 gap-10 lg:grid-cols-2 ">
-          {filterMenu.map(menu=><MenuCart
+          {filterMenu?.map(menu=><MenuCart
           key={menu._id} 
           items={menu}
           ></MenuCart>)}

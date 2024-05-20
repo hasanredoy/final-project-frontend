@@ -7,12 +7,16 @@ import banner5 from '../../assets/home/slide1.jpg';
 import SectionTitle from "../../components/sectionTitle/SectionTitle";
 import AllMenu from "../../CustomCompo/AllMenu";
 import MenuCart from "../../components/MenuCart/MenuCart";
+
+import {Link} from "react-router-dom"
+
+
 const Menu = () => {
-  const offer = AllMenu('offered')
-  const dessert = AllMenu('dessert')
-  const soup = AllMenu('soup')
-  const pizza = AllMenu('pizza')
-  const salad = AllMenu('salad')
+  const [menu] = AllMenu('popular')
+  const [dessert] = AllMenu('dessert')
+  const [soup] = AllMenu('soup')
+  const [pizza] = AllMenu('pizza')
+  const [salad] = AllMenu('salad')
   // console.log({dessert},{soup},{pizza},{drinks});
   return (
     <div>
@@ -35,11 +39,14 @@ const Menu = () => {
         </SectionTitle>
         <div className=" grid grid-cols-1 md:grid-cols-2 gap-10">
           {
-            offer?.map(offer => <MenuCart key={offer._id} items={offer}></MenuCart>)
+            menu?.map(offer => <MenuCart key={offer._id} items={offer}></MenuCart>)
           }
         </div>
         <div className="my-5 flex justify-center">
-    <button className=" btn btn-outline font-bold bg-slate-100 border-0 border-b-4">Order You&apos;re Favorite Food</button></div> 
+    <Link to={'/ourShop'}>
+    <button className=" btn btn-outline font-bold bg-slate-100 border-0 border-b-4">Order You&apos;re Favorite Food</button>
+    </Link>
+    </div> 
       </div>
       </div>
       {/* dessert */}
@@ -64,7 +71,11 @@ const Menu = () => {
           }
         </div>
         <div className=" my-5 flex justify-center">
-    <button className=" btn btn-outline font-bold bg-slate-100 border-0 border-b-4">Order Desserts</button></div>
+    <Link to={'/ourShop/dessert'}>
+    
+    <button className=" btn btn-outline font-bold bg-slate-100 border-0 border-b-4">Order Desserts</button>
+    </Link>
+    </div>
       </div>
       </div>
       {/* pizza  */}
@@ -89,7 +100,11 @@ const Menu = () => {
           }
         </div>
         <div className=" my-5 flex justify-center">
-    <button className=" btn btn-outline font-bold bg-slate-100 border-0 border-b-4">Order Pizza</button></div>
+        <Link to={'/ourShop/pizza'}>
+    
+    <button className=" btn btn-outline font-bold bg-slate-100 border-0 border-b-4">Order Pizza</button>
+    </Link>
+     </div>
       </div>
       </div>
       {/* soup */}
@@ -114,7 +129,11 @@ const Menu = () => {
           }
         </div>
         <div className=" my-5 flex justify-center">
-    <button className=" btn btn-outline font-bold bg-slate-100 border-0 border-b-4">Order Soup</button></div>
+    <Link to={'/ourShop/soup'}>
+    <button className=" btn btn-outline font-bold bg-slate-100 border-0 border-b-4">Order Soup</button>
+    
+    </Link>
+    </div>
       </div>
       </div>
       {/* salad */}
@@ -139,7 +158,11 @@ const Menu = () => {
           }
         </div>
         <div className=" my-5 flex justify-center">
-    <button className=" btn btn-outline font-bold bg-slate-100 border-0 border-b-4">Order Salad</button></div>
+    <Link to={'/ourShop/salad'}>
+    <button className=" btn btn-outline font-bold bg-slate-100 border-0 border-b-4">Order Salad</button>
+    
+    </Link>
+    </div>
       </div>
       </div>
     </div>

@@ -4,16 +4,19 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import AllMenu from "../../CustomCompo/AllMenu";
 import Card from "../../CustomCompo/Card";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const OurShop = () => {
-  const drinks = AllMenu('drinks')
-  const dessert = AllMenu('dessert')
-  const soup = AllMenu('soup')
-  const pizza = AllMenu('pizza')
-  const salad = AllMenu('salad')
+  const {category} =useParams()
+  const [drinks] = AllMenu('drinks')
+  const [soup ]= AllMenu('soup')
+  const [pizza] = AllMenu('pizza')
+  const [salad] = AllMenu('salad')
+  const [dessert] = AllMenu('dessert') 
 
-  return (
-    <div>
+return (
+  <div>
       <div>
         <Cover
           img={banner}
@@ -26,25 +29,26 @@ const OurShop = () => {
       {/* tabs  */}
 
       <div>
-        <Tabs>
+        <Tabs defaultIndex={category==='salad'&&0||category==='soup'&&1||category==='dessert'&&2||category==='pizza'&&3||category==='drinks'&&4} >
           <TabList>
-            <Tab>Salad</Tab>
-            <Tab>Soup</Tab>
+            <Tab >Salad</Tab>
+            <Tab >Soup</Tab>
             <Tab>Desert</Tab>
             <Tab>Pizza</Tab>
             <Tab>Drinks</Tab>
           </TabList>
 
 {/* salad */}
-          <TabPanel>
+          <TabPanel >
            <div className=" grid grid-cols-1 md:grid-cols-3 gap-10">
             {
               salad?.map((salad,index) =><Card index={index} key={salad._id} item={salad}></Card>)
             }
+            
            </div>
           </TabPanel>
           {/* soup */}
-          <TabPanel>
+          <TabPanel >
            <div className=" grid grid-cols-1 md:grid-cols-3 gap-10">
             {
               soup?.map((salad,index) =><Card index={index} key={salad._id} item={salad}></Card>)
@@ -58,6 +62,7 @@ const OurShop = () => {
               dessert?.map((salad,index) =><Card index={index} key={salad._id} item={salad}></Card>)
             }
            </div>
+         
           </TabPanel>
           {/* pizza  */}
           <TabPanel>

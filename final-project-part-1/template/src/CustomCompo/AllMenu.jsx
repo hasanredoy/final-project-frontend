@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 
-const AllMenu = (cate) => {
+const AllMenu = (category) => {
+
   const [menu , setMenu]=useState([])
   const [loading , setLoading]=useState(true)
+  
   useEffect(()=>{
-    fetch('http://localhost:5000/menu')
+    fetch(`http://localhost:5000/menu?category=${category}`)
     .then(res=>res.json())
     .then(data => {
       setMenu(data)
+      // console.log(data);
       setLoading(false)
     })
-  },[cate])
-  // console.log( typeof cate);
-  const filterMenu = menu.filter(menu => menu.category === cate)
-//  console.log(filterMenu);
-  return loading , filterMenu
+  },[category])
+  // console.log( menu);
+  return [menu]
 };
 
 export default AllMenu;
