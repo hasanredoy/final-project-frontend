@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/others/authentication2.png";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../authProvider/AuthProvider";
@@ -8,13 +8,16 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
-  LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import useAxiosCommon from "../../CustomCompo/useAxiosCommon";
+import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
-  const [validate , setValidate]=useState(true)
+  const [validate, setValidate] = useState(true);
+  const navigate = useNavigate();
+  const axiosCommon = useAxiosCommon();
   // console.log(registerUser);
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -24,9 +27,10 @@ const Register = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
+    const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    // const user = { name, photo, email, password };
+    const user = { name, photo, email, password };
     if (password.length < 6) {
       toast.error("Password Should Be 6 Character or More");
       return;
@@ -38,14 +42,30 @@ const Register = () => {
       return;
     }
 
-    // console.log(user);
+    console.log(user);
     createUser(email, password)
       .then((res) => {
         // console.log(res.user);
         updateProfile(res.user, {
           displayName: name,
+          photoURL: photo,
         });
-        toast.success("Registered Successfully");
+        //  adding user info to the database
+        const userData = {
+          name,
+          email,
+          photo,
+        };
+        console.log(userData);
+        axiosCommon.post("/users", userData).then((res) => {
+          // console.log(res.data.insertedId);
+          if (res.data.insertedId) {
+            toast.success("Registered Successfully");
+            setTimeout(() => {
+              navigate("/")
+            }, 500);
+          }
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -53,17 +73,17 @@ const Register = () => {
       });
   };
   const doSubmit = (e) => {
-    const validate = e.target.value
-    console.log(validate);
+    const validate = e.target.value;
+    // console.log(validate);
     // let user_captcha_value =
     //   document.getElementById("user_captcha_input").value;
-    
+
     if (validateCaptcha(validate) == true) {
-      toast.success("validation success")
-      setValidate(false)
+      toast.success("validation success");
+      setValidate(false);
     } else {
-    toast.error('Wrong Information Try Again')
-    setValidate(true)
+      toast.error("Wrong Information Try Again");
+      setValidate(true);
     }
   };
   return (
@@ -82,8 +102,21 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="name"
+                  name="name"
                   className="input input-bordered"
                   required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="text-2xl font-bold">Photo URL</span>
+                </label>
+                <input
+                  type="url"
+                  placeholder="Photo URL"
+                  className="input input-bordered"
+                  required
+                  name="photo"
                 />
               </div>
               <div className="form-control">
@@ -100,8 +133,12 @@ const Register = () => {
               </div>
               <div className="form-control">
                 <LoadCanvasTemplate />
-                <form >
-                  <input onBlur={doSubmit} className=" input input-bordered w-full" type="text"  />
+                <form>
+                  <input
+                    onBlur={doSubmit}
+                    className=" input input-bordered w-full"
+                    type="text"
+                  />
                 </form>
               </div>
               <div className="form-control">
@@ -117,13 +154,21 @@ const Register = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button className={`btn btn-error btn-outline ${validate?'btn-disabled':'btn'}`} >Register</button>
+                <button
+                  className={`btn btn-error btn-outline `}
+                >
+                  Register
+                </button>
               </div>
             </form>
+            <div className="divider">or</div>
+            <div>
+              <GoogleLogin></GoogleLogin>
+            </div>
             <p className=" py-5 font-bold text-center text-lg">
               {" "}
               Already Have an Account{" "}
-              <Link to={"/login"} className=" font-bold text-blue-600" >
+              <Link to={"/login"} className=" font-bold text-blue-600">
                 Login
               </Link>{" "}
               !!

@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../authProvider/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
 
 const Login = () => {
 
@@ -87,6 +88,10 @@ const {signIn}=useContext(AuthContext)
                 <button className="btn btn-primary btn-outline">Login</button>
               </div>
             </form>
+            <div className="divider">or</div>
+            <div>
+              <GoogleLogin></GoogleLogin>
+            </div>
             <p className=" py-5 font-bold text-center text-lg">
               {" "}
               New Here{" "}

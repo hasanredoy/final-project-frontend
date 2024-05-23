@@ -9,55 +9,75 @@ import ContactUs from "../pages/ContactUs/ContactUs";
 import PrivetRoute from "../pages/PrivetRoute/PrivetRoute";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../pages/Dashbord/Cart/Cart";
+import AllUsers from "../pages/Dashbord/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
-    children:[
+    children: [
       {
-        path:'/',
-        element:<Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-        path:'/ourMenu',
-        element:<PrivetRoute><Menu></Menu></PrivetRoute>
+        path: "/ourMenu",
+        element: (
+          <PrivetRoute>
+            <Menu></Menu>
+          </PrivetRoute>
+        ),
       },
       {
-        path:'/ourShop',
-        element:<OurShop></OurShop>
+        path: "/ourShop",
+        element: <OurShop></OurShop>,
       },
       {
-        path:'/ourShop/:category',
-        element:<PrivetRoute><OurShop></OurShop></PrivetRoute>
-        
+        path: "/ourShop/:category",
+        element: (
+          <PrivetRoute>
+            <OurShop></OurShop>
+          </PrivetRoute>
+        ),
       },
       {
-        path:'/contactUs',
-        element:<PrivetRoute><ContactUs></ContactUs></PrivetRoute>
-        
+        path: "/contactUs",
+        element: (
+          <PrivetRoute>
+            <ContactUs></ContactUs>
+          </PrivetRoute>
+        ),
       },
-      
-    ]
+    ],
   },
   {
-  path:'/login',
-  element:<Login></Login>
-},
-{
-  path:'/register',
-  element:<Register></Register>
-},
-{
-  path:'dashboard',
-  element:<Dashboard></Dashboard>,
-  children:[
-    {
-      path:"cart",
-      element:<Cart></Cart>
-    }
-  ]
-}
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/register",
+    element: <Register></Register>,
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivetRoute>
+        <Dashboard></Dashboard>
+      </PrivetRoute>
+    ),
+    children: [
+      {
+        path: "cart",
+        element: <Cart></Cart>,
+      },
+
+      // admin 
+      {
+        path: "users",
+        element: <AllUsers></AllUsers>,
+      },
+    ],
+  },
 ]);
 
 export default router;
