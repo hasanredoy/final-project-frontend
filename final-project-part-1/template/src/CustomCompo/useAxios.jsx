@@ -11,7 +11,7 @@ const navigate = useNavigate()
 
   axiosURL.interceptors.request.use(function(config){
     const token = localStorage.getItem('access_token')
-    console.log('connection stops by interceptors',token);
+    // console.log('connection stops by interceptors',token);
     config.headers.authorization =`Bearer ${token}`
     return config;
   },function(error){

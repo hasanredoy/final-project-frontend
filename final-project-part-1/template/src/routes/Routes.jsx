@@ -10,6 +10,10 @@ import PrivetRoute from "../pages/PrivetRoute/PrivetRoute";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../pages/Dashbord/Cart/Cart";
 import AllUsers from "../pages/Dashbord/AllUsers/AllUsers";
+import AddItem from "../pages/Dashbord/AddItem/AddItem";
+import AdminPrivetRoute from "../pages/PrivetRoute/AdminPrivetRoute";
+import ManageItems from "../pages/Dashbord/ManageItems/ManageItems";
+import UpdateMenu from "../pages/Dashbord/updateMenu/UpdateMenu";
 
 const router = createBrowserRouter([
   {
@@ -73,8 +77,21 @@ const router = createBrowserRouter([
 
       // admin 
       {
+        path: "addItems",
+        element: <AdminPrivetRoute><AddItem></AddItem></AdminPrivetRoute>,
+      },
+      {
+        path: "update/:id",
+        element: <AdminPrivetRoute><UpdateMenu></UpdateMenu></AdminPrivetRoute>,
+        loader:({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
+      },
+      {
+        path: "manageItems",
+        element: <AdminPrivetRoute><ManageItems></ManageItems></AdminPrivetRoute>,
+      },
+      {
         path: "users",
-        element: <AllUsers></AllUsers>,
+        element: <AdminPrivetRoute> <AllUsers></AllUsers></AdminPrivetRoute>,
       },
     ],
   },
