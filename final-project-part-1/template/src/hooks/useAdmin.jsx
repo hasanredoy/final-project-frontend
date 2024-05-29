@@ -3,10 +3,11 @@ import useAuth from "./useAuth";
 import useAxios from "../CustomCompo/useAxios";
 
 const useAdmin = () => {
-  const {user}=useAuth()
+  const {user, loading}=useAuth()
   const axiosURL = useAxios()
   const {data:isAdmin,isPending: isAdminLoading}= useQuery({
     queryKey:[user?.email,'admin'],
+    enabled: !loading,
     queryFn: async()=>{
       const res = await axiosURL.get(`/users/admin/${user?.email}`)
       // console.log(res.data);

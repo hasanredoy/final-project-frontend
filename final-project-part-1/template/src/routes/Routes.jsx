@@ -14,6 +14,10 @@ import AddItem from "../pages/Dashbord/AddItem/AddItem";
 import AdminPrivetRoute from "../pages/PrivetRoute/AdminPrivetRoute";
 import ManageItems from "../pages/Dashbord/ManageItems/ManageItems";
 import UpdateMenu from "../pages/Dashbord/updateMenu/UpdateMenu";
+import Payment from "../pages/Dashbord/Payment/Payment";
+import PaymentHistory from "../pages/Dashbord/PymentHistory/PaymentHistory";
+import UserHome from "../pages/Dashbord/UserHome/UserHome";
+import AdminHome from "../pages/Dashbord/AdminHome/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -71,11 +75,27 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+        path: "userHome",
+        element: <UserHome></UserHome>,
+      },
+      {
         path: "cart",
         element: <Cart></Cart>,
       },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
 
       // admin 
+      {
+        path: "adminHome",
+        element: <AdminPrivetRoute><AdminHome></AdminHome></AdminPrivetRoute>,
+      },
       {
         path: "addItems",
         element: <AdminPrivetRoute><AddItem></AddItem></AdminPrivetRoute>,

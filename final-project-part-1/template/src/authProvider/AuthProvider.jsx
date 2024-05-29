@@ -42,6 +42,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const updateUserProfile = (name, photo) => {
+    setLoading(true)
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -60,13 +61,15 @@ const AuthProvider = ({ children }) => {
           .then(res=>{
            if(res.data.token){
              localStorage.setItem('access_token', res.data.token )
+             setLoading(false)
            }
           })
         
       }else{
         //jwt
+        localStorage.removeItem('access_token')
+        setLoading(false)
       }
-      setLoading(false)
     })
     return () => {
       return unsubscribe()

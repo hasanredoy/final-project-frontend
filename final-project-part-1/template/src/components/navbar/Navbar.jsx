@@ -6,10 +6,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BsCartCheckFill } from "react-icons/bs";
 import useCart from "../../hooks/useCart";
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart]= useCart()
+  const [isAdmin]=useAdmin()
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -23,7 +25,9 @@ const Navbar = () => {
 
       <NavLink to={"/contactUs"}>Contact Us</NavLink>
 
-      <NavLink to={"/dashboard/cart"}>Dashboard</NavLink>
+{user&&isAdmin&&<NavLink to={"/dashboard/adminHome"}>Dashboard</NavLink>}
+{user&&!isAdmin&&<NavLink to={"/dashboard/userHome"}>Dashboard</NavLink>}
+      
 
       <NavLink to={"/ourMenu"}>Our Menu</NavLink>
 

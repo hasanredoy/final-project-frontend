@@ -3,6 +3,7 @@ import SectionTitle from "../../../components/sectionTitle/SectionTitle";
 import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxios from "../../../CustomCompo/useAxios";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const axiosURL = useAxios();
@@ -49,10 +50,16 @@ const Cart = () => {
         <div className=" flex justify-evenly my-20 ">
           <h1 className=" text-3xl font-bold">Total Orders : {cart.length}</h1>
           <h2 className=" text-3xl font-bold">Total Price : {total} $</h2>
-          <button className=" bg-orange-400 btn font-bold text-white">
-            {" "}
-            Pay{" "}
-          </button>
+          {
+            cart.length?<Link to={'/dashboard/payment'}>
+            <button className=" bg-orange-400 btn font-bold text-white">
+              {" "}
+              Pay{" "}
+            </button></Link>:<button disabled className=" bg-orange-400 btn font-bold text-white">
+              {" "}
+              Pay{" "}
+            </button>
+          }
         </div>
         <div className="overflow-x-auto">
           <table className="table rounded-t-lg ">

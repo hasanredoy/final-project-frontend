@@ -88,7 +88,7 @@ const[isAdmin]=useAdmin();
             className={
               "flex gap-2 text-xl font-bold text-black justify-center items-center"
             }
-            to={"/dashboard/payment"}
+            to={"/dashboard/paymentHistory"}
           >
             <FaAd></FaAd>
             Payment History

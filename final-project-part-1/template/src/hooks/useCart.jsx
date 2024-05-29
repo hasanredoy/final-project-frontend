@@ -3,7 +3,7 @@ import useAxios from "../CustomCompo/useAxios";
 import useAuth from "./useAuth";
 const useCart = () => {
   const {user}=useAuth()
-  console.log(user);
+  // console.log(user);
   const axiosURL = useAxios()
   const {refetch,data:cart=[]} = useQuery({
      queryKey:['cart',user?.email],
