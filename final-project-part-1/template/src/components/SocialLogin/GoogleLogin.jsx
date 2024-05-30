@@ -11,19 +11,19 @@ const GoogleLogin = () => {
   const handleGoogleLogin = ()=>{
     signInWithGoogle()
     .then(res=>{
-      console.log(res.user);
+      // console.log(res.user);
       const userData = {
         name:res?.user?.displayName,
         email:res?.user?.email,
       }
       axiosCommon.post("/users",userData)
       .then(res=>{
-        console.log(res.data);
+        // console.log(res.data);
         navigate('/')
       })
     })
     .catch(err=>{
-      console.log(err.user);      
+      console.log(err);      
     })
   }
   return (

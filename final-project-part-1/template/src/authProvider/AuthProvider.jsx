@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
 
       if(currentUser){
         const userEmail ={email: currentUser?.email|| user?.email}
-          console.log(userEmail);
+          // console.log(userEmail);
           axiosCommon.post(`/jwt`,userEmail)
           .then(res=>{
            if(res.data.token){

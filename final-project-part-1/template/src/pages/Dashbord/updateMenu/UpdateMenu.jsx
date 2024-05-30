@@ -8,11 +8,11 @@ import { useLoaderData } from "react-router-dom";
 const UpdateMenu = () => {
    const axiosURL = useAxios()
    const item=useLoaderData()
-   console.log(item);
+  //  console.log(item);
    const {name , price , recipe,category,_id}= item
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     // const imageFile = { image: data.image[0] };
     // const res = await axiosCommon.post(image_hosting_API, imageFile, {
     //   headers: {
@@ -30,7 +30,7 @@ const UpdateMenu = () => {
       };
       // now post the data on db 
       const menuRes = await axiosURL.patch(`/menu/${_id}`,menuData)
-      console.log(menuRes.data);
+      // console.log(menuRes.data);
       if(menuRes.data.modifiedCount>0){
         toast.success('Item updated successfully')
       }

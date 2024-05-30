@@ -7,7 +7,7 @@ const OurMenu = () => {
 
   const [filterMenu , setMenu]=useState([])
   useEffect(()=>{
-    fetch(`http://localhost:5000/menu?category=popular`)
+    fetch(`https://bistro-boss-server-delta-ashy.vercel.app/menu?category=popular`)
     .then(res=>res.json())
     .then(data => {
       setMenu(data)

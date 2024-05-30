@@ -10,11 +10,11 @@ const email = user?.email
     queryKey:['payments',email],
     queryFn:async()=>{
       const res = axiosURL.get(`/payments/${email}`)
-      console.log(res.data);
+      // console.log(res.data);
       return res
     }
   })
-  console.log(payments);
+  // console.log(payments);
   return (
     <div>
       

@@ -20,11 +20,11 @@ const CheckoutForm = () => {
   if(totalPrice>0){
     axiosURL.post('/create-payment-intent',{price:totalPrice})
   .then(res=>{
-    console.log(res.data.clientSecret);
+    // console.log(res.data.clientSecret);
     setClientSecret(res.data.clientSecret);
   })
   .catch(err=>{
-    console.log(err);
+    // console.log(err);
   })
   }
  },[axiosURL,totalPrice])
@@ -46,10 +46,10 @@ const CheckoutForm = () => {
       card
      })
      if(error){
-      console.log('payment error', error);
+      // console.log('payment error', error);
       setError(error.message)
      }else{
-      console.log('payment method',paymentMethod);
+      // console.log('payment method',paymentMethod);
       setError('')
      }
 
@@ -67,11 +67,11 @@ const CheckoutForm = () => {
     
 
     if(confirmError){
-      console.log('confirm error');
+      // console.log('confirm error');
     }else{
-      console.log('paymentIntent',paymentIntent);
+      // console.log('paymentIntent',paymentIntent);
       if(paymentIntent.status==='succeeded'){
-        console.log('transectionID', paymentIntent.id);
+        // console.log('transectionID', paymentIntent.id);
         setTransectionID( paymentIntent.id);
         const payment ={ 
           name:user?.displayName,
@@ -85,7 +85,7 @@ const CheckoutForm = () => {
 
         }
         const res= await axiosURL.post('/payments',payment)
-        console.log(res.data);
+        // console.log(res.data);
         refetch()
       }
     }

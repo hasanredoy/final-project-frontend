@@ -6,7 +6,7 @@ const AllMenu = (category) => {
   const [loading , setLoading]=useState(true)
   
   useEffect(()=>{
-    fetch(`http://localhost:5000/menu?category=${category}`)
+    fetch(`https://bistro-boss-server-delta-ashy.vercel.app/menu?category=${category}`)
     .then(res=>res.json())
     .then(data => {
       setMenu(data)

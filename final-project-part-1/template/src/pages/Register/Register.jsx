@@ -42,7 +42,7 @@ const Register = () => {
       return;
     }
 
-    console.log(user);
+    // console.log(user);
     createUser(email, password)
       .then((res) => {
         // console.log(res.user);
@@ -56,7 +56,7 @@ const Register = () => {
           email,
           photo,
         };
-        console.log(userData);
+        // console.log(userData);
         axiosCommon.post("/users", userData).then((res) => {
           // console.log(res.data.insertedId);
           if (res.data.insertedId) {

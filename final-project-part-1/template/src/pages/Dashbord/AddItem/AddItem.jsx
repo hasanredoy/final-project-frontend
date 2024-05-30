@@ -15,7 +15,7 @@ const AddItem = () => {
 
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     const imageFile = { image: data.image[0] };
     const res = await axiosCommon.post(image_hosting_API, imageFile, {
       headers: {
@@ -33,12 +33,12 @@ const AddItem = () => {
       };
       // now post the data on db 
       const menuRes = await axiosURL.post('/menu',menuData)
-      console.log(menuRes.data);
+      // console.log(menuRes.data);
       if(menuRes.data.insertedId){
         toast.success('Item added successfully')
       }
     }
-    console.log('image response -->',res.data);
+    // console.log('image response -->',res.data);
   };
 
   return (

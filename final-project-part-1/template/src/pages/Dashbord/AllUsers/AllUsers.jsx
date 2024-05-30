@@ -28,7 +28,7 @@ const AllUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosURL.patch(`/users/admin/${id}`).then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.modifiedCount > 0) {
             refetch();
             Swal.fire({
@@ -53,7 +53,7 @@ const AllUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosURL.delete(`/user/${id}`).then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({

@@ -26,7 +26,7 @@ const Card = ({item ,index}) => {
         }
         axiosURL.post('/cart',cartItem)
         .then(res=>{
-          console.log(res.data);
+          // console.log(res.data);
           if(res.data.insertedId){ toast.success(`${name} added to 
           your cart`)
           // refetch the api after item added in data base 

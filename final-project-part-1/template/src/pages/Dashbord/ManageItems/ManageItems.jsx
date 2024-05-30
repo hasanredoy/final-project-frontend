@@ -17,9 +17,9 @@ const ManageItems = () => {
       return res.data
     }
   })
-  console.log(items);
+  // console.log(items);
   const handleDelete = (id,name) => {
-    console.log(id);
+    // console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You Want to Remove This User!",
@@ -31,7 +31,7 @@ const ManageItems = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosURL.delete(`/menu/${id}`).then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
